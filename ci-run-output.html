@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CI Workflow - GitHub Actions</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,.15);
+    --accent: #2f81f7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .topbar {
+    background: #010409;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .topbar strong { color: var(--text); }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px; }
+  .run-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .big-check {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--green); color: #0d1117;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700;
+  }
+  h1 { font-size: 22px; margin: 0; font-weight: 600; }
+  .badges { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 4px 12px; font-size: 12px; font-weight: 600;
+    background: var(--panel);
+  }
+  .badge.success { color: var(--green); border-color: var(--green);
+    background: var(--green-bg); }
+  .meta { color: var(--muted); margin: 8px 0 20px; font-size: 13px; }
+  .meta span { margin-right: 16px; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #1b222c;
+  }
+  .job-title { font-weight: 600; font-size: 15px; }
+  .muted { color: var(--muted); font-size: 12px; }
+  .check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green); color: #0d1117;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex: 0 0 auto;
+  }
+  .step { border-top: 1px solid var(--border); padding: 12px 16px; }
+  .step:first-of-type { border-top: none; }
+  .step-head { display: flex; align-items: center; gap: 10px; }
+  .step-name { font-weight: 600; }
+  .chip {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 12px; color: var(--muted);
+    background: #0d1117; border: 1px solid var(--border);
+    border-radius: 6px; padding: 1px 8px;
+  }
+  .step-time { margin-left: auto; color: var(--muted); font-size: 12px; }
+  pre.step-log {
+    margin: 10px 0 0; padding: 12px;
+    background: #0d1117; border: 1px solid var(--border);
+    border-radius: 6px; overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Courier New", monospace;
+    font-size: 12.5px; color: #adbac7; white-space: pre-wrap; word-break: break-word;
+  }
+  pre.block {
+    margin: 0; padding: 16px; background: #0d1117;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 12.5px; color: #adbac7; white-space: pre-wrap; word-break: break-word;
+  }
+  h2.section { font-size: 16px; margin: 24px 0 8px; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
+</style>
+</head>
+<body>
+  <div class="topbar">Repositories / devops-lab / <strong>Actions</strong> / CI Workflow</div>
+  <div class="wrap">
+
+    <div class="run-header">
+      <span class="big-check">&#10003;</span>
+      <h1>CI Workflow</h1>
+      <div class="badges">
+        <span class="badge success">&#10003; Success</span>
+        <span class="badge">branch: master</span>
+        <span class="badge">event: push</span>
+      </div>
+    </div>
+    <div class="meta">
+      <span>Triggered via <strong>push</strong></span>
+      <span>on branch <strong>master</strong></span>
+      <span>Started 2026-10-10T17:44:05.373Z</span>
+      <span>Duration 0.02s</span>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="check">&#10003;</span>
+        <span class="job-title">build</span>
+        <span class="muted">runs-on: ubuntu-latest</span>
+        <span class="badge success" style="margin-left:auto">&#10003; Success</span>
+      </div>
+      
+        <div class="step">
+          <div class="step-head">
+            <span class="check">&#10003;</span>
+            <span class="step-name">Checkout code</span>
+            <span class="chip">uses: actions/checkout@v4</span>
+            <span class="step-time">0.00s</span>
+          </div>
+          <pre class="step-log">    Syncing repository... (actions/checkout@v4)
+    checkout simulated - no network in local sandbox
+  OK Checkout code completed successfully (0.00s)</pre>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <span class="check">&#10003;</span>
+            <span class="step-name">Run CI</span>
+            <span class="chip">run: echo &quot;Build and Test Successful&quot;</span>
+            <span class="step-time">0.02s</span>
+          </div>
+          <pre class="step-log">    Run: echo &quot;Build and Test Successful&quot;
+    Build and Test Successful
+  OK Run CI completed successfully (0.02s)</pre>
+        </div>
+    </div>
+
+    <h2 class="section">Workflow file &mdash; .github/workflows/deploy.yml</h2>
+    <div class="panel"><pre class="block">name: CI Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run CI
+        run: echo &quot;Build and Test Successful&quot;
+</pre></div>
+
+    <h2 class="section">Raw run log &mdash; run-log.txt</h2>
+    <div class="panel"><pre class="block">==========================================================================
+  CI Workflow
+==========================================================================
+Workflow   : CI Workflow
+Event      : push
+Branch     : master
+Job        : build
+Runner     : ubuntu-latest
+Parsed with: built-in parser (no PyYAML needed)
+Started    : 2026-10-10T17:44:05.373Z
+
+[ step 1 ] Checkout code
+  Syncing repository... (actions/checkout@v4)
+  checkout simulated - no network in local sandbox
+  OK Checkout code completed successfully (0.00s)
+
+[ step 2 ] Run CI
+  Run: echo &quot;Build and Test Successful&quot;
+  Build and Test Successful
+  OK Run CI completed successfully (0.02s)
+
+Process completed with exit code 0
+SUCCESS
+Finished   : 2026-10-10T17:44:05.394Z
+Duration   : 0.02s</pre></div>
+
+    <div class="footer">
+      Generated locally by ci_runner.py &bull; git/GitHub push simulated (git is not installed in this environment).
+    </div>
+  </div>
+</body>
+</html>
